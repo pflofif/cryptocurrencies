@@ -7,15 +7,15 @@ public class MainViewModel : ObservableObject
 {
     private HomeViewModel HomeViewModel { get; }
     private InfoViewModel InfoViewModel { get; }
-    private object _currentView;
+    private object _currentView = null!;
 
     public RelayCommand HomeViewCommand { get; }
     public RelayCommand InfoViewCommand { get; }
 
-    public MainViewModel()
+    public MainViewModel(HomeViewModel homeViewModel, InfoViewModel infoViewModel)
     {
-        InfoViewModel = new InfoViewModel();
-        HomeViewModel = new HomeViewModel();
+        HomeViewModel = homeViewModel;
+        InfoViewModel = infoViewModel;
         
         CurrentView = HomeViewModel;
 
