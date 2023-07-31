@@ -11,6 +11,7 @@ namespace Cryptocurrencies.Services;
 public interface ICryptoApiService
 {
     Task<List<Cryptocurrency>?> GetTopCurrenciesAsync(int numberOfCurrencies);
+    Task<Cryptocurrency?> GetCryptocurrencyAsync(string id);
 }
 
 public class CryptoApiService : ICryptoApiService
@@ -22,6 +23,31 @@ public class CryptoApiService : ICryptoApiService
     public CryptoApiService(IHttpClientFactory httpClientFactory)
     {
         _httpClientFactory = httpClientFactory;
+    }
+
+    public async Task<Cryptocurrency?> GetCryptocurrencyAsync(string id)
+    {
+        try
+        {
+            string endpoint = $"{CapCoinBaseUrl}/assets/{id}";
+            HttpClient httpClient = _httpClientFactory.CreateClient();
+
+            HttpResponseMessage response = await httpClient.GetAsync(endpoint);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            string json = await response.Content.ReadAsStringAsync();
+            CoinCapResponseSoloElement? coinCap = JsonConvert.DeserializeObject<CoinCapResponseSoloElement>(json);
+            return coinCap?.Data;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw;
+        }
     }
 
     public async Task<List<Cryptocurrency>?> GetTopCurrenciesAsync(int numberOfCurrencies)
@@ -39,7 +65,7 @@ public class CryptoApiService : ICryptoApiService
             }
 
             string json = await response.Content.ReadAsStringAsync();
-            CoinCapResponse? coinCap = JsonConvert.DeserializeObject<CoinCapResponse>(json);
+            CoinCapResponseListElements? coinCap = JsonConvert.DeserializeObject<CoinCapResponseListElements>(json);
             return coinCap?.Data;
         }
         catch (Exception e)

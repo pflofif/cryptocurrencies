@@ -2,8 +2,7 @@
 
 namespace Cryptocurrencies.MVVM.Model;
 
-class CoinCapResponse
+class CoinCapResponseListElements
 {
     public List<Cryptocurrency> Data { get; init; }
-        
 }
