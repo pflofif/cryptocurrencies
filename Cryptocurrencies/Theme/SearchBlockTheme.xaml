@@ -12,13 +12,17 @@
                         <Grid>
                             <Rectangle StrokeThickness="1" />
                             <TextBox Margin="1"
-                                     Text="{TemplateBinding Text}"
                                      BorderThickness="0"
                                      Background="Transparent"
                                      VerticalAlignment="Center"
                                      Padding="5"
                                      Foreground="#CFCFCF"
-                                     x:Name="SearchBox" />
+                                     x:Name="SearchBox"
+                                     Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBox.InputBindings>
+                                    <KeyBinding Command="{Binding SearchCommand}" Key="Return"/>
+                                </TextBox.InputBindings>
+                            </TextBox>
 
                             <TextBlock IsHitTestVisible="False"
                                        Text="Search"
@@ -28,19 +32,17 @@
                                        FontSize="11"
                                        Foreground="DarkGray"
                                        Grid.Column="1">
-
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName= SearchBox}"
+                                            <DataTrigger Binding="{Binding Text, ElementName=SearchBox}"
                                                          Value="">
-                                                <Setter Property="Visibility" Value="Visible"></Setter>
+                                                <Setter Property="Visibility" Value="Visible" />
                                             </DataTrigger>
                                         </Style.Triggers>
-                                        <Setter Property="Visibility" Value="Hidden"></Setter>
+                                        <Setter Property="Visibility" Value="Hidden" />
                                     </Style>
                                 </TextBlock.Style>
-
                             </TextBlock>
 
                         </Grid>
