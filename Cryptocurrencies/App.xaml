@@ -1,14 +1,14 @@
 ﻿<Application x:Class="Cryptocurrencies.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Cryptocurrencies"
+             xmlns:helpers="clr-namespace:Cryptocurrencies.Helpers"
              xmlns:viewModel="clr-namespace:Cryptocurrencies.MVVM.ViewModel"
              xmlns:view="clr-namespace:Cryptocurrencies.MVVM.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Theme/TransparentButtonStyle.xaml"/>
+                <ResourceDictionary Source="Theme/TransparentButtonStyle.xaml" />
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/SearchBlockTheme.xaml" />
                 <ResourceDictionary Source="Theme/CurrenciesListTheme.xaml" />
@@ -20,7 +20,7 @@
             <DataTemplate DataType="{x:Type viewModel:InfoViewModel}">
                 <view:Information />
             </DataTemplate>
-
+            <helpers:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
