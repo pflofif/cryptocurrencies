@@ -6,5 +6,10 @@
              xmlns:local="clr-namespace:Cryptocurrencies.MVVM.View"
              mc:Ignorable="d"
              d:DesignHeight="350" d:DesignWidth="800">
-    <TextBlock Text="asdas"></TextBlock>
+    <ListView Background="#1f2630"
+              ScrollViewer.CanContentScroll="False"
+              ItemsSource="{Binding TopCurrencies}"
+              Style="{StaticResource CurrenciesListStyle}">
+    
+    </ListView>
 </UserControl>
