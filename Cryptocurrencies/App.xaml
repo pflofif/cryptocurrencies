@@ -8,6 +8,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/TransparentButtonStyle.xaml"/>
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/SearchBlockTheme.xaml" />
                 <ResourceDictionary Source="Theme/CurrenciesListTheme.xaml" />

@@ -38,8 +38,8 @@ public class CryptoApiService : ICryptoApiService
                 return Enumerable.Empty<Cryptocurrency>().ToList();
             }
 
-            var json = await response.Content.ReadAsStringAsync();
-            var coinCap = JsonConvert.DeserializeObject<CoinCapResponse>(json);
+            string json = await response.Content.ReadAsStringAsync();
+            CoinCapResponse? coinCap = JsonConvert.DeserializeObject<CoinCapResponse>(json);
             return coinCap?.Data;
         }
         catch (Exception e)
