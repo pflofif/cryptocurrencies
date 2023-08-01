@@ -26,57 +26,60 @@
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <DockPanel Margin="4" Name="BackgroundBorder">
-                        <DockPanel.Style>
-                            <Style TargetType="DockPanel">
-                                <Style.Triggers>
+                    <Button
+                        Command="{Binding DataContext.SelectCryptocurrencyCommand,
+                                 RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                        CommandParameter="{Binding}"
+                        BorderThickness="0"
+                        Background="Transparent">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                        BorderThickness="0">
+                                    <DockPanel Margin="4" Name="BackgroundBorder">
+                                        <TextBlock Text="{Binding Name}"
+                                                   Foreground="#f4f7f1"
+                                                   FontSize="16"
+                                                   FontWeight="Medium"
+                                                   VerticalAlignment="Center" />
+
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <TextBlock Text="{Binding PriceUsd}"
+                                                       VerticalAlignment="Center"
+                                                       Foreground="#f4f7f1"
+                                                       FontSize="16"
+                                                       FontWeight="Medium"
+                                                       Padding="0,0,15,0" />
+
+                                            <Border CornerRadius="4"
+                                                    Background="{Binding ChangePercent24Hr,
+                                                     Converter={StaticResource ChangePercentColorConverter}}"
+                                                    Width="70">
+                                                <TextBlock Text="{Binding ChangePercent24Hr}"
+                                                           FontWeight="Medium"
+                                                           FontSize="16"
+                                                           Foreground="#f4f7f1"
+                                                           Padding="10,5,10,5" />
+                                            </Border>
+                                        </StackPanel>
+                                    </DockPanel>
+                                </Border>
+                                <ControlTemplate.Triggers>
+
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#303030" />
+                                        <Setter TargetName="BackgroundBorder"
+                                                Property="Background"
+                                                Value="#3b3b3b" />
                                     </Trigger>
                                     <Trigger Property="IsMouseOver" Value="False">
-                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter TargetName="BackgroundBorder"
+                                                Property="Background"
+                                                Value="Transparent" />
                                     </Trigger>
-
-                                    <DataTrigger
-                                        Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
-                                         AncestorType={x:Type ListBoxItem}}, 
-                                         Path=IsSelected}"
-                                        Value="True">
-                                        <Setter Property="Background" Value="#303030" />
-                                    </DataTrigger>
-
-                                </Style.Triggers>
-
-                            </Style>
-                        </DockPanel.Style>
-
-                        <Grid Margin="4,0,0,0">
-                            <TextBlock Text="{Binding Name}" Foreground="#f4f7f1" FontSize="16" FontWeight="Medium" 
-                                       VerticalAlignment="Center"/>
-                        </Grid>
-
-                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center"
-                                    Margin="0,0,8,0">
-                            
-                            <TextBlock Text="{Binding PriceUsd}"
-                                       VerticalAlignment="Center"
-                                       Foreground="#f4f7f1"
-                                       FontSize="16"
-                                       FontWeight="Medium"
-                                       Padding="0,0,15,0" />
-                            
-                            <Border CornerRadius="4"
-                                    Background="{Binding ChangePercent24Hr, Converter={StaticResource ChangePercentColorConverter}}"
-                                    Width="70">
-                                <TextBlock Text="{Binding ChangePercent24Hr}"
-                                           FontWeight="Medium"
-                                           FontSize="16"
-                                           Foreground="#f4f7f1"
-                                           Padding="10,5,10,5" />
-                            </Border>
-                        </StackPanel>
-
-                    </DockPanel>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                 </DataTemplate>
             </Setter.Value>
         </Setter>

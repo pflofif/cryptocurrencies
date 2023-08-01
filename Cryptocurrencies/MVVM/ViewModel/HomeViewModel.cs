@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Cryptocurrencies.Core;
 using Cryptocurrencies.MVVM.Model;
 using Cryptocurrencies.Services;
@@ -22,6 +23,8 @@ public class HomeViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
+    
+    public ICommand SelectCryptocurrencyCommand { get; set; }
     public HomeViewModel(ICryptoApiService cryptoApiService)
     {
         _cryptoApiService = cryptoApiService;

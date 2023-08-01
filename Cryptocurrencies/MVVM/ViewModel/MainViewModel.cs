@@ -27,7 +27,7 @@ public class MainViewModel : ObservableObject
         _apiService = apiService;
 
         CurrentView = HomeViewModel;
-
+        HomeViewModel.SelectCryptocurrencyCommand = new RelayCommand(OnSelectCryptocurrency);
         HomeViewCommand = new RelayCommand(_ => CurrentView = HomeViewModel);
         InfoViewCommand = new RelayCommand(_ => CurrentView = InfoViewModel);
         SearchCommand = new RelayCommand(async _ => await Search());
@@ -55,6 +55,17 @@ public class MainViewModel : ObservableObject
     private async Task Search()
     {
         Cryptocurrency? crypto = await _apiService.GetCryptocurrencyAsync(SearchQuery);
+        SetInformationViewModel(crypto);
+    }
+
+    private void OnSelectCryptocurrency(object parameter)
+    {
+        if (parameter is not Cryptocurrency selectedCrypto) return;
+        SetInformationViewModel(selectedCrypto);
+    }
+
+    private void SetInformationViewModel(Cryptocurrency? crypto)
+    {
         InfoViewModel.SelectedCryptocurrency = crypto;
         CurrentView = InfoViewModel;
     }
