@@ -5,16 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModal="clr-namespace:Cryptocurrencies.MVVM.ViewModel"
         mc:Ignorable="d"
+        xmlns:helpers="clr-namespace:Cryptocurrencies.Helpers"
         Title="MainWindow" Height="600" Width="920"
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True">
-    
-    <Window.DataContext>
-        <viewModal:MainViewModel />
-    </Window.DataContext>
-    
+
     <Border
         Background="#272537"
         CornerRadius="10">
@@ -63,6 +60,23 @@
                      Margin="5"
                      Style="{StaticResource  SearchBoxTheme}">
             </TextBox>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Height="30">
+                <Button Content="—"
+                        Command="{x:Static helpers:WindowCommands.MinimizeCommand}"
+                        Style="{StaticResource TransparentButtonStyle}" />
+                <Button Content="🗗"
+                        Command="{x:Static helpers:WindowCommands.RollUpCommand}"
+                        Style="{StaticResource TransparentButtonStyle}" />
+                <Button Content="✖"
+                        Command="{x:Static helpers:WindowCommands.CloseCommand}"
+                        Style="{StaticResource TransparentButtonStyle}" />
+            </StackPanel>
 
             <ContentControl Grid.Row="1"
                             Grid.Column="1"

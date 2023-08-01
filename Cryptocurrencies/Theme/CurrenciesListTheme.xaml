@@ -1,0 +1,89 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:core="clr-namespace:Cryptocurrencies.Core"
+                    xmlns:helpers="clr-namespace:Cryptocurrencies.Helpers">
+
+    <helpers:ChangePercentColorConverter x:Key="ChangePercentColorConverter" />
+
+    <Style TargetType="ListView" x:Key="CurrenciesListStyle">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderThickness" Value="0" />
+
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Button
+                        Command="{Binding DataContext.SelectCryptocurrencyCommand,
+                                 RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                        CommandParameter="{Binding}"
+                        BorderThickness="0"
+                        Background="Transparent">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                        BorderThickness="0">
+                                    <DockPanel Margin="4" Name="BackgroundBorder">
+                                        <TextBlock Text="{Binding Name}"
+                                                   Foreground="#f4f7f1"
+                                                   FontSize="16"
+                                                   FontWeight="Medium"
+                                                   VerticalAlignment="Center" />
+
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <TextBlock Text="{Binding PriceUsd}"
+                                                       VerticalAlignment="Center"
+                                                       Foreground="#f4f7f1"
+                                                       FontSize="16"
+                                                       FontWeight="Medium"
+                                                       Padding="0,0,15,0" />
+
+                                            <Border CornerRadius="4"
+                                                    Background="{Binding ChangePercent24Hr,
+                                                     Converter={StaticResource ChangePercentColorConverter}}"
+                                                    Width="70">
+                                                <TextBlock Text="{Binding ChangePercent24Hr}"
+                                                           FontWeight="Medium"
+                                                           FontSize="16"
+                                                           Foreground="#f4f7f1"
+                                                           Padding="10,5,10,5" />
+                                            </Border>
+                                        </StackPanel>
+                                    </DockPanel>
+                                </Border>
+                                <ControlTemplate.Triggers>
+
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="BackgroundBorder"
+                                                Property="Background"
+                                                Value="#3b3b3b" />
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                        <Setter TargetName="BackgroundBorder"
+                                                Property="Background"
+                                                Value="Transparent" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+</ResourceDictionary>
